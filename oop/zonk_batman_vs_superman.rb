@@ -1,12 +1,12 @@
 # In honor of the new movie Batman vs. Superman
 # Create a Superhero class
 # Superheros have attributes 
-    # name (string, readable), 
-    # hitpoints (integer, writable), 
-    # attack (integer), 
-    # alive (boolean, set automatically as true, writable), 
-    # and has_special_tool (boolean, we want to describe if they have a special_tool start automatically to false, readable)
-    # -- you decide if they have to be readable/writable attributes
+  # name (string, readable), 
+  # hitpoints (integer, writable), 
+  # attack (integer), 
+  # alive (boolean, set automatically as true, writable), 
+  # and has_special_tool (boolean, we want to describe if they have a special_tool start automatically to false, readable)
+  # -- you decide if they have to be readable/writable attributes
 # Notice attributes are set as a single hash
 # For this class Superheros objects will interact with other Superhero objects by passing them into the method arguements. (check Driver code)
 # Superheros can hit, so they need a hit method that takes away hit points from another Superhero object, by the number of attack they have. (again check the driver code)
@@ -14,6 +14,33 @@
 # if a Superhero is attacked and their hitpoints are less than 1, they are no longer alive
 # Superhero needs a grab_tool method, that sets the has_special_tool attribute to true.
 
+class Superhero
+  attr_reader :name, :attack
+  attr_accessor :hitpoints, :alive, :has_special_tool
+
+  def initialize(args)
+    @name = args[:name]
+    @hitpoints = args[:hitpoints]
+    @attack = args[:attack]
+    @alive = true
+    @has_special_tool = false
+  end
+
+  def hit(foe)
+    foe.hitpoints = 
+      if @has_special_tool
+        foe.hitpoints - (@attack * 3)
+      else
+        foe.hitpoints - @attack
+      end
+
+    foe.alive = false if foe.hitpoints < 1 
+  end
+
+  def grab_tool
+    @has_special_tool = true
+  end
+end
 
 # Driver code - don't touch anything below this line.
 puts "TESTING the Superhero class..."
@@ -75,7 +102,6 @@ puts "Testing..."
 superman.hit(batman)
 puts "Batman's hitpoints are #{batman.hitpoints}"
 
-
 if batman.hitpoints == 27
   puts "PASS!"
 else
@@ -83,13 +109,11 @@ else
 end
 puts
 
-
 puts "Batman hits Superman"
 puts "Testing..."
 
 batman.hit(superman)
 puts "Superman's hitpoints are #{superman.hitpoints}"
-
 
 if superman.hitpoints == 42
   puts "PASS!"
@@ -104,7 +128,6 @@ puts "• #{superman.name} has #{superman.hitpoints} hitpoints"
 puts "• #{batman.name} has #{batman.hitpoints} hitpoints"
 puts 
 
-
 puts "Batman picks up Kryptonite (tool)"
 puts "Testing..."
 
@@ -116,7 +139,6 @@ else
   puts "F"
 end
 puts
-
 
 5.times do 
   puts "Batman hits Superman"
@@ -131,7 +153,6 @@ else
   puts "F"
 end
 puts
-
 
 puts "Checking Stats..."
 puts

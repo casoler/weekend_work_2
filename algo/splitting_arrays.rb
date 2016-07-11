@@ -1,11 +1,19 @@
 # Complete the method called split_array, which two parameters, the first being an array, and the second being an integer. The method will then create an array of other arrays, each one being the size of the indicated by the second parameter. See the driver code for examples.
 
 def split_array(array, array_size)
-  array_old = array
   array_new = []
+  index = 0
 
-  array.each do |element|
-    
+  while index < array.length
+    mini_array = []
+    array_size.times do
+      mini_array << array[index]
+      index += 1
+    end
+    array_new << mini_array
+  end
+
+  array_new
 end
 
 # Driver code - don't touch anything below this line.
